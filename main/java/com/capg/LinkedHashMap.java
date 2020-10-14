@@ -42,7 +42,7 @@ public class LinkedHashMap<K,V> {
 		MyMapNode<K, V> myMapNode=(MyMapNode<K,V>)myLinkedList.search_ret(key);
 		if(myMapNode==null) {
 			myMapNode=new MyMapNode<>(key, value);
-			myLinkedList.append((INode)myMapNode);
+			myLinkedList.append(myMapNode);
 		}
 		else {
 			myMapNode.setValue(value);
@@ -52,5 +52,11 @@ public class LinkedHashMap<K,V> {
 	@Override
 	public String toString() {
 		return "MyLinkedHashMap List{"+myBucketArray+'}';
+	}
+
+	public void remove(K key) {
+		int index=this.getBucketIndex(key);
+		MyLinkedList<K> linkedList=this.myBucketArray.get(index);
+		linkedList.delete(key);
 	}
 }

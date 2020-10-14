@@ -133,20 +133,16 @@ public class MyLinkedList<K> {
 		return false;
 	}
 	
-	public int delete(K key) {
+	public void delete(K key) {
 		INode<K> temp=head;
 		if(temp==null) {
-			return 0;
+			System.out.println("No nodes");
 		}
 		while(!((temp.getNext()).getKey().equals(key))) {
 			temp=temp.getNext();
 		}
 		temp.setNext((temp.getNext()).getNext());
-		print();
-		int i=size();
-		System.out.println("Size after Deletion is "+i);
 		adjustTail();
-		return i;
 	}
 	
 	public boolean isEmpty() {
@@ -167,6 +163,9 @@ public class MyLinkedList<K> {
 	}
 	
 	public INode<K> search_ret(K key) {
+		if(head==null) {
+			return null;
+		}
 		INode<K> temp = head;
 		while (temp != null) {
 			if (temp.getKey().equals(key)) {
@@ -180,5 +179,13 @@ public class MyLinkedList<K> {
 	@Override
 	public String toString() {
 		return "MyLinkedListNodes{"+head+'}';
+	}
+	
+	public void deleteGivenNode(INode<K> node) {
+		INode<K> temp=head;
+		while (temp.getNext()!=node) {
+			temp = temp.getNext();
+		}
+		temp.setNext(node.getNext());
 	}
 }
